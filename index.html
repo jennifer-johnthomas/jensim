@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jensim Bookstore | Classics & Romance</title>
+    <style>
+        /* Base Styling & Elegant Literary Colors */
+        body {
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fdfbf7; /* Classic book-page cream */
+            color: #1a2530; /* Deep navy text */
+        }
+
+        /* Navigation Header */
+        header {
+            background-color: #0f1c2c; /* Midnight navy */
+            color: #ffffff;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #d4af37; /* Metallic gold border */
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 16px;
+        }
+
+        .cta-btn {
+            background-color: #d4af37;
+            color: #0f1c2c;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .cta-btn:hover {
+            background-color: #f3ce56;
+        }
+
+        /* Hero Banner Section */
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(rgba(15, 28, 44, 0.05), rgba(15, 28, 44, 0.02));
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #0f1c2c;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        /* Book Collections */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .collection-title {
+            font-size: 32px;
+            border-bottom: 2px solid #0f1c2c;
+            padding-bottom: 10px;
+            margin-top: 40px;
+            color: #0f1c2c;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .book-card {
+            background: #ffffff;
+            border: 1px solid #e2ded5;
+            padding: 15px;
+            text-align: center;
+            border-radius: 6px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .book-placeholder {
+            width: 100%;
+            height: 320px;
+            background-color: #e2ded5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            border-left: 8px solid #0f1c2c; /* Book spine look */
+        }
+
+        .book-card h3 {
+            font-size: 18px;
+            margin: 10px 0 5px 0;
+        }
+
+        .book-card p {
+            font-size: 14px;
+            color: #666;
+            margin: 0;
+        }
+
+        /* Footer Details */
+        footer {
+            background-color: #0f1c2c;
+            color: #ffffff;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+            font-size: 14px;
+        }
+
+        footer p {
+            margin: 8px 0;
+        }
+
+        footer a {
+            color: #d4af37;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation Bar -->
+    <header>
+        <div class="logo">JENSIM</div>
+        <nav>
+            <a href="#austen">Jane Austen</a>
+            <a href="#quinn">Julia Quinn</a>
+            <a href="tel:0431132240" class="cta-btn">Call 0431132240</a>
+        </nav>
+    </header>
+
+    <!-- Welcome Hero Section -->
+    <section class="hero">
+        <h1>Where Romance &amp; Classics Live Forever</h1>
+        <p>Step into the elegant ballrooms of the Regency era. Jensim curates the finest collection of timeless tales and modern romantic masterpieces.</p>
+        <a href="tel:0431132240" class="cta-btn">Order by Phone: 0431132240</a>
+    </section>
+
+    <div class="container">
+        
+        <!-- Jane Austen Section -->
+        <h2 id="austen" class="collection-title">The Jane Austen Library</h2>
+        <div class="grid">
+            <div class="book-card">
+                <!-- Replace 'src=""' with your image links later -->
+                <img class="book-placeholder" alt="Pride and Prejudice Cover Image" src="https://unsplash.com">
+                <h3>Pride and Prejudice</h3>
+                <p>Classic Regency Novel</p>
+            </div>
+            <div class="book-card">
+                <img class="book-placeholder" alt="Sense and Sensibility Cover Image" src="https://unsplash.com">
+                <h3>Sense and Sensibility</h3>
+                <p>Classic Regency Novel</p>
+            </div>
+        </div>
+
+        <!-- Julia Quinn Section -->
+        <h2 id="quinn" class="collection-title">The Julia Quinn Collection</h2>
+        <div class="grid">
+            <div class="book-card">
+                <img class="book-placeholder" alt="The Duke and I Cover Image" src="https://unsplash.com">
+                <h3>The Duke and I</h3>
+                <p>Bridgerton Series #1</p>
+            </div>
+            <div class="book-card">
+                <img class="book-placeholder" alt="The Viscount Who Loved Me Cover Image" src="https://unsplash.com">
+                <h3>The Viscount Who Loved Me</h3>
+                <p>Bridgerton Series #2</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Contact & Brand Footer -->
+    <footer>
+        <p><strong>Jensim Bookstore</strong></p>
+        <p>Phone: <a href="tel:0431132240">0431132240</a></p>
+        <p>Domain Marketplace: <a href="http://jensim.com">Jensim.com</a></p>
+        <p style="margin-top: 20px; font-size: 12px; color: #888;">&copy; 2026 Jensim Books. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
