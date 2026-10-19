@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wenty Anglican Tamil Church - Roster Unavailability</title>
+    <style>
+        :root {
+            --primary-color: #0f4c81;
+            --accent-color: #e056fd;
+            --bg-color: #f5f7fa;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        h1 {
+            color: var(--primary-color);
+            font-size: 24px;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        p.subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label.section-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+        }
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            background-color: #fff;
+            outline: none;
+        }
+        select:focus {
+            border-color: var(--primary-color);
+        }
+        .instruction {
+            background-color: #edf2f7;
+            padding: 12px;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 4px;
+            font-size: 13px;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+        .checkbox-tile {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .checkbox-tile:hover {
+            background-color: #f7fafc;
+        }
+        .checkbox-tile input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            cursor: pointer;
+        }
+        .checkbox-tile.selected {
+            border-color: #e53e3e;
+            background-color: #fff5f5;
+            color: #9b2c2c;
+        }
+        button {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background-color: #0d3f6c;
+        }
+        .status-message {
+            display: none;
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-weight: 500;
+        }
+        .status-success {
+            display: block;
+            background-color: #c6f6d5;
+            color: #22543d;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Wenty Anglican Tamil Church</h1>
+    <p class="subtitle">Next Quarter Roster Unavailability Collection</p>
+    
+    <div class="instruction">
+        <strong>How to update:</strong> Select your name from the menu below, then check the boxes for any weekends you are <strong>UNAVAILABLE</strong> to serve. Leave available dates empty.
+    </div>
+
+    <form id="unavailabilityForm">
+        <div class="form-group">
+            <label class="section-label" for="memberName">Select Your Name</label>
+            <select id="memberName" name="memberName" required>
+                <option value="" disabled selected>-- Choose your name --</option>
+                <!-- Dynamically populated names -->
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="section-label">Mark Weekends You are UNAVAILABLE</label>
+            <div class="grid-container" id="weekendGrid">
+                <!-- Dynamically populated weekend options -->
+            </div>
+        </div>
+
+        <button type="submit" id="submitBtn">Submit Updates</button>
+    </form>
+
+    <div id="status" class="status-message"></div>
+</div>
+
+<script>
+    // CONFIGURATION
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxOMo05nGuErM5NmcsoxZ-fzfY2pLXzz-YWI4PNe5v1qFgdUSOYyJWyuK8S-jZTxj8/exec';
+
+    // List of 50 church members (Replace placeholder names with actual team members)
+    const members = [
+        "Abishek A.", "Ananthi B.", "Benjamin C.", "Daniel D.", "Divya E.",
+        "Ebenezer F.", "Grace G.", "Hari H.", "Immanuel I.", "Jaya J.",
+        "Jonathan K.", "Kavitha L.", "Luke M.", "Mary N.", "Nirmala O.",
+        "Paul P.", "Priya Q.", "Rachel R.", "Samuel S.", "Sanjay T.",
+        "Sharon U.", "Thomas V.", "Usha W.", "Victor X.", "Yohan Y."
+        // Add all 50 target congregation members here...
+    ];
+
+    // List of Next Quarter Weekends (Customise dates as required)
+    const weekends = [
+        "Nov 07 - Nov 08",
+        "Nov 14 - Nov 15",
+        "Nov 21 - Nov 22",
+        "Nov 28 - Nov 29",
+        "Dec 05 - Dec 06",
+        "Dec 12 - Dec 13",
+        "Dec 19 - Dec 20",
+        "Dec 26 - Dec 27",
+        "Jan 02 - Jan 03",
+        "Jan 09 - Jan 10",
+        "Jan 16 - Jan 17",
+        "Jan 23 - Jan 24",
+        "Jan 30 - Jan 31"
+    ];
+
+    // Initialize UI Elements
+    const nameSelect = document.getElementById('memberName');
+    members.sort().forEach(member => {
+        const opt = document.createElement('option');
+        opt.value = member;
+        opt.textContent = member;
+        nameSelect.appendChild(opt);
+    });
+
+    const grid = document.getElementById('weekendGrid');
+    weekends.forEach((wknd, index) => {
+        const id = index + 1;
+        const label = document.createElement('label');
+        label.className = 'checkbox-tile';
+        label.innerHTML = `
+            <input type="checkbox" name="weekend_${id}" value="Unavailable" id="wknd_${id}">
+            <span>${wknd}</span>
+        `;
+        grid.appendChild(label);
+
+        // Highlight red visually when flagged unavailable
+        const checkbox = label.querySelector('input');
+        checkbox.addEventListener('change', function() {
+            if(this.checked) {
+                label.classList.add('selected');
+            } else {
+                label.classList.remove('selected');
+            }
+        });
+    });
+
+    // Handle Form Submission
+    document.getElementById('unavailabilityForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const submitBtn = document.getElementById('submitBtn');
+        const statusDiv = document.getElementById('status');
+        
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting adjustments...';
+
+        // Prepare parameters
+        const formData = new FormData(this);
+        formData.append('totalWeekends', weekends.length);
+
+        const params = new URLSearchParams(formData);
+
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            body: params,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.result === 'success') {
+                statusDiv.textContent = "Thank you! Your unavailabilities have been updated.";
+                statusDiv.className = "status-message status-success";
+                this.reset();
+                document.querySelectorAll('.checkbox-tile').forEach(el => el.classList.remove('selected'));
+            } else {
+                throw new Error();
+            }
+        })
+        .catch(() => {
+            statusDiv.textContent = "Submission failed. Please check network connections and try again.";
+            statusDiv.className = "status-message";
+            statusDiv.style.background = "#fed7d7";
+            statusDiv.style.color = "#9b2c2c";
+            statusDiv.style.display = "block";
+        })
+        .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Submit Updates';
+        });
+    });
+</script>
+
+</body>
+</html>
